@@ -1,93 +1,106 @@
 # Copy Relative Path
 
-A tiny, free Finder add-on for macOS. Right-click any file or folder and copy its
-**relative path** to the clipboard, ready to paste into code, a README, or a terminal.
+Right-click a file on your Mac and copy its **short path** instead of the long one.
 
-macOS already ships with *Copy as Pathname* (right-click and hold Option), but it
-only gives you the full absolute path:
+macOS can already copy the full path (right-click, hold the Option key):
 
 ```
 /Users/you/projects/my-app/src/components/Button.tsx
 ```
 
-This gives you the path you actually want to paste:
+This tool copies the short, useful part:
 
 ```
 src/components/Button.tsx
 ```
 
-## What "relative" means here
+That is the path you actually want to paste into code, notes, or a chat.
 
-1. If the item is inside a **git repository**, the path is relative to the repo root.
-2. If it is not in a git repo but is under your home folder, you get a `~`-relative path
-   (`~/Documents/notes.md`).
-3. Otherwise it falls back to the absolute path.
+---
 
-Select multiple items and it copies one path per line.
+## Install (about 30 seconds)
 
-## Install
+1. [**Click here to download**](../../releases/latest), then open the downloaded `.zip` to unzip it.
+2. Double-click the file named **Copy Relative Path.workflow**.
+3. A box pops up. Click **Install**.
 
-### Option A: double-click (no terminal)
+Done. There is nothing else to set up.
 
-1. [Download the latest release](../../releases) and unzip it.
-2. Double-click **`Copy Relative Path.workflow`**.
-3. macOS asks to install it. Click **Install**.
+**If macOS shows a warning** that says the file is from an unidentified developer:
+right-click the **Copy Relative Path.workflow** file, choose **Open**, then click **Open** again.
+You only do this once. (It happens because the tool is free and not paid-signed by Apple.)
 
-That's it. Right-click a file in Finder and look under **Services → Copy Relative Path**.
+---
 
-> If macOS says it's from an unidentified developer, right-click the `.workflow`
-> and choose **Open**, then confirm. It only needs this once.
+## How to use it
 
-> **Why "Services" and not "Quick Actions"?** On current macOS the right-click
-> *Quick Actions* submenu is reserved for signed app extensions; user-installed
-> Automator actions like this one live under the *Services* submenu instead. Same
-> result, one submenu over. (A signed version that lands in Quick Actions is on the
-> roadmap.)
+1. Right-click any file or folder in Finder.
+2. Go to **Services** near the bottom of the menu.
+3. Click **Copy Relative Path**.
 
-### Option B: terminal (one line)
+A small notification confirms it copied. Now paste anywhere with Command + V.
+
+Select several files first and it copies all their paths, one per line.
+
+> **Want it faster?** You can give it a keyboard shortcut:
+> System Settings > Keyboard > Keyboard Shortcuts > Services > find "Copy Relative Path".
+
+---
+
+## What exactly does it copy?
+
+It picks the most useful short path automatically:
+
+- Inside a code project (a git folder): the path from the project's top folder, like `src/app/main.py`.
+- Anywhere else in your home folder: a path starting with `~`, like `~/Documents/notes.md`.
+- Anywhere else: the full path.
+
+---
+
+## Remove it
+
+Run this in Terminal:
+
+```bash
+./uninstall.sh
+```
+
+Or just delete this file:
+
+```
+~/Library/Services/Copy Relative Path.workflow
+```
+
+---
+
+## For developers
+
+Install from the terminal:
 
 ```bash
 git clone https://github.com/anudeep-bonagiri/pathCopier.git
 cd pathCopier && ./install.sh
 ```
 
-## Use it
-
-Right-click any file or folder in Finder:
-
-```
-Services  ->  Copy Relative Path
-```
-
-A notification confirms the copy. Paste anywhere.
-
-**Optional keyboard shortcut:** System Settings → Keyboard → Keyboard Shortcuts →
-Services → find *Copy Relative Path* and assign a key (e.g. ⌃⌥⌘C).
-
-## Use it from the terminal too
-
-The same logic is a standalone script:
+Use the same logic as a standalone script:
 
 ```bash
-./copy-relative-path.sh path/to/file.txt           # copies repo-relative path
-./copy-relative-path.sh src/*.ts                    # multiple files, one per line
+./copy-relative-path.sh path/to/file.txt     # one file
+./copy-relative-path.sh src/*.ts             # many files, one path per line
 ```
 
-## Uninstall
+**How it works:** it is a macOS Automator Service (the `.workflow` folder) that runs a
+small bash script on the selected files and copies the result with `pbcopy`. No
+background app, no internet, no extra installs. The whole script is about 30 lines:
+[`copy-relative-path.sh`](copy-relative-path.sh).
 
-```bash
-./uninstall.sh
-```
+**Why "Services" and not "Quick Actions"?** On current macOS the Quick Actions submenu
+only shows Apple-signed app extensions, so user-installed actions like this one appear
+under Services instead. Same result, one menu over. A signed version that shows up under
+Quick Actions is planned.
 
-…or delete `~/Library/Services/Copy Relative Path.workflow`.
-
-## How it works
-
-It's a macOS Automator **Service** (the `.workflow` bundle) that runs a small bash
-script on the selected items and pipes the result to `pbcopy`. No background process,
-no network access, no dependencies beyond what macOS already has. Read the whole thing
-in [`copy-relative-path.sh`](copy-relative-path.sh). It's about 30 lines.
+---
 
 ## License
 
-[MIT](LICENSE). Free to use, modify, and share.
+[MIT](LICENSE). Free to use, change, and share.
