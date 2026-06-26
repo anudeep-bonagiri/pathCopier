@@ -33,10 +33,16 @@ Select multiple items and it copies one path per line.
 2. Double-click **`Copy Relative Path.workflow`**.
 3. macOS asks to install it. Click **Install**.
 
-That's it. Right-click a file in Finder and look under **Quick Actions → Copy Relative Path**.
+That's it. Right-click a file in Finder and look under **Services → Copy Relative Path**.
 
 > If macOS says it's from an unidentified developer, right-click the `.workflow`
 > and choose **Open**, then confirm. It only needs this once.
+
+> **Why "Services" and not "Quick Actions"?** On current macOS the right-click
+> *Quick Actions* submenu is reserved for signed app extensions; user-installed
+> Automator actions like this one live under the *Services* submenu instead. Same
+> result, one submenu over. (A signed version that lands in Quick Actions is on the
+> roadmap.)
 
 ### Option B: terminal (one line)
 
@@ -50,7 +56,7 @@ cd pathCopier && ./install.sh
 Right-click any file or folder in Finder:
 
 ```
-Quick Actions  ->  Copy Relative Path
+Services  ->  Copy Relative Path
 ```
 
 A notification confirms the copy. Paste anywhere.
@@ -77,9 +83,9 @@ The same logic is a standalone script:
 
 ## How it works
 
-It's a macOS **Quick Action** (an Automator Service) that runs a small bash script
-on the selected items and pipes the result to `pbcopy`. No background process, no
-network access, no dependencies beyond what macOS already has. Read the whole thing
+It's a macOS Automator **Service** (the `.workflow` bundle) that runs a small bash
+script on the selected items and pipes the result to `pbcopy`. No background process,
+no network access, no dependencies beyond what macOS already has. Read the whole thing
 in [`copy-relative-path.sh`](copy-relative-path.sh). It's about 30 lines.
 
 ## License

@@ -44,7 +44,7 @@ cp -R "$SRC" "$DEST"
 echo "Installed: $DEST"
 echo
 echo "Right-click any file or folder in Finder, then:"
-echo "  Quick Actions  ->  Copy Relative Path"
+echo "  Services  ->  Copy Relative Path"
 echo
 echo "Tip: assign a keyboard shortcut in"
 echo "  System Settings -> Keyboard -> Keyboard Shortcuts -> Services."
