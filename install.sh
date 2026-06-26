@@ -9,7 +9,7 @@
 #   ./install.sh
 #
 # Or straight from GitHub (no clone needed):
-#   curl -fsSL https://raw.githubusercontent.com/USER/copy-relative-path/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/anudeep-bonagiri/pathCopier/main/install.sh | bash
 
 set -euo pipefail
 
@@ -25,7 +25,7 @@ SRC="$SCRIPT_DIR/$WORKFLOW"
 if [ ! -d "$SRC" ]; then
   echo "Quick Action not found locally; downloading from GitHub..."
   TMP="$(mktemp -d)"
-  REPO_TARBALL="https://github.com/USER/copy-relative-path/archive/refs/heads/main.tar.gz"
+  REPO_TARBALL="https://github.com/anudeep-bonagiri/pathCopier/archive/refs/heads/main.tar.gz"
   curl -fsSL "$REPO_TARBALL" | tar -xz -C "$TMP"
   SRC="$(find "$TMP" -type d -name "$WORKFLOW" | head -1)"
   if [ -z "$SRC" ]; then

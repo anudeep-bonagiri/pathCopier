@@ -41,8 +41,8 @@ That's it. Right-click a file in Finder and look under **Quick Actions → Copy 
 ### Option B: terminal (one line)
 
 ```bash
-git clone https://github.com/USER/copy-relative-path.git
-cd copy-relative-path && ./install.sh
+git clone https://github.com/anudeep-bonagiri/pathCopier.git
+cd pathCopier && ./install.sh
 ```
 
 ## Use it
